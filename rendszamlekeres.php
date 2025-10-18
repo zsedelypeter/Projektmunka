@@ -20,7 +20,6 @@ $result = $stmt->get_result();
 
 /*Kiíratás*/
 if ($result->num_rows > 0) {
-    // Output data of each row
     while($row = $result->fetch_assoc()) {
         echo "<h3>Autó adatok:</h3>";
         echo "Rendszám: " . $row["rendszam"] . "<br>";
@@ -53,6 +52,5 @@ if ($result->num_rows > 0) {
     echo "Nincs ilyen!";
 }
 
-// Closing connection
 $conn->close();
 ?>

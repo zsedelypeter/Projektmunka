@@ -1,7 +1,4 @@
 <?php
-// Enable MySQLi exceptions (at the top of your file)
-mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -16,33 +13,36 @@ $username = $_POST["username"];
 $email = $_POST["email"];
 $password = $_POST["password"];
 
-// Prepared Statements (RECOMMENDED - Most Secure)
-$sql = "INSERT INTO felhasznalok (felhasznalonev, email, jelszo) VALUES (?, ?, ?)";
-$stmt = $conn->prepare($sql);
+$stmt = $conn->prepare("SELECT felhasznalonev FROM felhasznalok WHERE felhasznalonev = ?");
+$stmt -> bind_param("s", $username);
+$stmt -> execute();
+$result = $stmt->get_result();
+$new_user = true;
 
-// Check if prepare() failed
-if (!$stmt) {
-    die("Prepare failed: " . $conn->error);
+if ($result->num_rows > 0) {
+    echo "Foglalt felhasználónév!<br>";
+    $new_user = false;
 }
 
-$stmt->bind_param("sss", $username, $email, $password);
+$stmt = $conn->prepare("SELECT email FROM felhasznalok WHERE email = ?");
+$stmt -> bind_param("s", $email);
+$stmt -> execute();
+$result = $stmt->get_result();
+$new_email = true;
 
-try {
-    $stmt->execute();
-    
-    // Check if any rows were affected
-    if ($stmt->affected_rows > 0) {
-        $last_id = $conn->insert_id;
-        echo "Sikeres regisztráció! Last inserted ID is: " . $last_id;
-    } else {
-        echo "Sikertelen regisztráció!";
-    }
-    
-} catch (mysqli_sql_exception $e) {
-    // Handle specific errors (like duplicate username/email)
-    if ($e->getCode() == 1062) { // Duplicate entry error code
-        echo "Hiba: A felhasználónév vagy email már létezik!";
-    } else {
-        echo "Hiba történt a regisztráció során: " . $e->getMessage();
+if ($result->num_rows > 0) {
+    echo "Foglalt email!<br>";
+    $new_email = false;
+}
+
+if ($new_user AND $new_email) {
+    $sql = "INSERT INTO felhasznalok (felhasznalonev, email, jelszo) VALUES (?, ?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("sss", $username, $email, $password);
+
+    if ($stmt->execute()) {
+        if ($stmt->affected_rows > 0) {
+            echo "Sikeres regisztráció!";
+        }
     }
 }
