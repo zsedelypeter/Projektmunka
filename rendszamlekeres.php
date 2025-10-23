@@ -12,7 +12,7 @@ if ($conn->connect_error) {
 $rendszam = $_POST["rendszam"];
 $alvazszam = $_POST["alvazszam"];
 
-$sql = 'SELECT rendszam, alvazszam, marka, tipus, szin, gydatum, uzema, hengeru, teljesitmeny, kep, kmallas, muszakilej, forgalome, biztositase, korozese, tulajdonossz, motorkod, kornyezetved, gepjkat, utassz, valtotip, kivitel, tomeg, vontattomf, vontattomfn FROM autok WHERE rendszam = ? OR alvazszam = ? ';
+$sql = 'SELECT a.rendszam, a.alvazszam, a.marka, a.tipus, a.szin, a.gydatum, a.uzema, a.hengeru, a.teljesitmeny, a.kep, m.kmallas, a.muszakilej, a.forgalome, a.biztositase, a.korozese, a.tulajdonossz, a.motorkod, a.kornyezetved, a.gepjkat, a.utassz, a.valtotip, a.kivitel, a.tomeg, a.vontattomf, a.vontattomfn, m.mvdatum, m.eredmeny FROM autok a LEFT JOIN muszaki_vizsga m ON a.alvazszam = m.alvazszam WHERE a.rendszam = ? OR a.alvazszam = ? ';
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $rendszam, $alvazszam);
 $stmt->execute();
@@ -31,7 +31,7 @@ if ($result->num_rows > 0) {
         echo "Üzemanyag: " . $row["uzema"] . "<br>";
         echo "Hengerűrtartalom: " . $row["hengeru"] . "<br>";
         echo "Teljesítmény: " . $row["teljesitmeny"] . "<br>";
-        echo "Kép: " . $row["kep"] . "<br>";
+        echo "Kép: <img src='img/" . $row["kep"] . "' alt='fingfangfung'><br>";
         echo "Kilométeróra állás: " . $row["kmallas"] . "<br>";
         echo "Műszaki lejárat: " . $row["muszakilej"] . "<br>";
         echo "Forgalmi engedély: " . $row["forgalome"] . "<br>";
@@ -47,6 +47,8 @@ if ($result->num_rows > 0) {
         echo "Tömeg: " . $row["tomeg"] . "<br>";
         echo "Vontatott tömeg fékkel: " . $row["vontattomf"] . "<br>";
         echo "Vontatott tömeg fék nélkül: " . $row["vontattomfn"] . "<br>";
+        echo "Műszaki vizsga dátuma: " . $row["mvdatum"] . "<br>";
+        echo "Műszaki vizsga eredménye: " . $row["eredmeny"] . "<br>";
     }
 } else {
     echo "Nincs ilyen!";
