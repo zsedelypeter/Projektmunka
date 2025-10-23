@@ -1,14 +1,28 @@
 <html>
     <head>
-        <h1>Kezdolap</h1>
+        <title>Bengo</title>
+        <link rel="icon" type="image/x-icon" href="https://www.shutterstock.com/shutterstock/videos/3558613281/thumb/12.jpg?ip=x480">
+        <link rel="stylesheet" href="kezdolap.css">
     </head>
     <body>
+        <div class="header-box">
+            <h1>Bengo</h1>
+            <div class="header-buttons">
+                <a href="login.html" class="register-button">Bejelentkezés <a href=""></a>
+            </div>
+        </div>
+        <p>Tudd meg pillanatok alatt, mi rejlik a rendszám mögött!<br>
+            Egy kattintás, és máris előtted a jármű múltja, adatai és értéke. Gyorsan, egyszerűen és megbízhatóan.</p>
         <form action="rendszamlekeres.php" method="POST">
             <label for="rendszam">Rendszám:</label><br>
-            <input type="text" id="rendszam" name="rendszam"><br>
+            <input type="text" id="rendszam" name="rendszam" placeholder="ABC123"><br><br>
             <label for="alvazszam">Alvázszám:</label><br>
-            <input type="text" id="alvazszam" name="alvazszam"><br><br>
-            <input type="submit" value="Keresés">
+            <input type="text" id="alvazszam" name="alvazszam" placeholder="4Y1SL65848Z411439"><br><br>
+            <input type="submit" value="Ellenőrzés">
+        <div class="p2">✔ Jármű vizsgálatai során készült képek<br>
+                ✔ Kilóméteróra állásának az alakulása<br>
+                ✔ Műszaki adatok kimutatása</div>
+            </div>
         </form>
     </body>
 </html>

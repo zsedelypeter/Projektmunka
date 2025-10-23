@@ -1,0 +1,155 @@
+body{
+    background-image: url('icegif-153.gif');
+    background-size:cover;
+    background-attachment: fixed;
+    background-position: center 15px;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+
+.header-box {
+    width: 100%;
+    background-color: white;
+    padding: 10px;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+
+.header-buttons {
+    font-size: medium;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+h1{
+    color:#1F2937;
+    font-family:inter;
+    text-shadow: #1F2937 1px 1px 2px;
+    text-align: left;
+    position: relative;
+    padding-left: 15px
+
+}
+form {
+    background: rgba(31, 41, 55, 0.4);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.2);
+    width: 500px;
+    height: 300px;
+    padding: 10px;
+    border-radius:10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    color:#FFFFFF;
+    text-align:center;
+    margin: 150px auto;
+
+}
+
+p {
+    font-weight: bold;
+    color: #ffffff;
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 35px;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.p2 {
+    margin-top: 50px;
+    font-weight: bold;
+    color: #ffffff;
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    font-size: 20px;
+    text-align: center;
+}
+
+input[type="submit"], .register-button {
+    margin: 10px 10px; 
+    padding: 5px 20px;
+    width: 150px;
+    length: 50px;
+    background-color: #FFFFFF;
+    color: #1F2937;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    transition: all 0.3s ease;
+    transform: scale(1);
+    font-size: 20px;
+}
+
+label[for="rendszam"], label[for="alvazszam"] {
+  font-size: 20px;
+    font-weight: bold;
+  padding-top: 10px;
+  font-family: 'Zalando Sans Expanded', sans-serif;
+  display: block;
+    margin-bottom: 0px;
+}
+
+#rendszam {
+  width: 250px;
+  height: 60px;
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-align: center;
+  background: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 6px;
+  font-family: 'Arial Black', 'Impact', sans-serif;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#rendszam:focus {
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+#alvazszam {
+  width: 450px;
+  height: 60px;
+  font-size: 32px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-align: center;
+  background: white;
+  color: black;
+  border: 3px solid black;
+  border-radius: 6px;
+  font-family: 'Arial Black', 'Impact', sans-serif;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+#alvatszam :focus {
+  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+}
+
+input[type="submit"]:hover, .register-button:hover {
+    transform: scale(1.05);
+    background-color: #1F2937;
+    color: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
