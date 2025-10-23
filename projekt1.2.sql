@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2025. Okt 15. 17:49
+-- Létrehozás ideje: 2025. Okt 23. 15:41
 -- Kiszolgáló verziója: 10.4.32-MariaDB
 -- PHP verzió: 8.2.12
 
@@ -38,7 +38,6 @@ CREATE TABLE `autok` (
   `hengeru` int(4) DEFAULT NULL COMMENT 'Kocsi hengerűrtartalma',
   `teljesitmeny` int(7) NOT NULL COMMENT 'Kocsi teljesitménye',
   `kep` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_hungarian_ci DEFAULT NULL COMMENT 'Kép az autóról',
-  `kmallas` int(20) NOT NULL COMMENT 'Kilóméteróra állása',
   `muszakilej` date NOT NULL COMMENT 'Műszaki lejárata',
   `forgalome` tinyint(1) NOT NULL COMMENT 'Autó forgalomban van-e',
   `biztositase` tinyint(1) NOT NULL COMMENT 'Autón van-e biztositás?',
@@ -59,12 +58,12 @@ CREATE TABLE `autok` (
 -- A tábla adatainak kiíratása `autok`
 --
 
-INSERT INTO `autok` (`alvazszam`, `rendszam`, `marka`, `tipus`, `szin`, `gydatum`, `uzema`, `hengeru`, `teljesitmeny`, `kep`, `kmallas`, `muszakilej`, `forgalome`, `biztositase`, `korozese`, `tulajdonossz`, `motorkod`, `kornyezetved`, `gepjkat`, `utassz`, `valtotip`, `kivitel`, `tomeg`, `vontattomf`, `vontattomfn`) VALUES
-('JH4DC5380TS000111', 'TES789', 'Honda', 'Civic', 'fekete', '2018-11-09', 'benzin', 1498, 129, 'civic.jpg', 64000, '2025-12-15', 1, 1, 0, 1, 'L15B7', 'EU6', 'M1', 5, 'automata', 'sedan', 1250, 1000, 500),
-('VF1CLBA0H12345678', 'ABC123', 'Renault', 'Clio', 'piros', '2016-03-14', 'benzin', 1197, 88, 'clio.jpg', 96500, '2025-09-30', 1, 1, 0, 2, 'D4F', 'EU5', 'M1', 5, 'manuális', 'ferdehátú', 1090, 900, 450),
-('WAUZZZ8KXCA000222', 'ADM001', 'Audi', 'A4', 'szürke', '2020-05-12', 'dízel', 1968, 150, 'audi_a4.jpg', 42000, '2026-08-01', 1, 1, 0, 1, 'DFGA', 'EU6', 'M1', 5, 'automata', 'kombí', 1470, 1700, 750),
-('WAUZZZ8V4GA123456', 'AAAZ675', 'Audi', 'A3 Sportback', 'Fekete', '2016-05-12', 'Benzin', 1395, 110, NULL, 145000, '2025-07-30', 1, 1, 0, 1, 'CZEA', 'EURO6', 'M1', 5, 'Automata', 'Hatchback', 1280, NULL, NULL),
-('WVWZZZ1JZXW000001', 'XYZ456', 'Volkswagen', 'Golf', 'fehér', '2010-06-22', 'dízel', 1598, 105, 'golf.jpg', 185000, '2026-04-01', 1, 1, 0, 3, 'CAYC', 'EU5', 'M1', 5, 'manuális', 'ferdehátú', 1210, 1300, 600);
+INSERT INTO `autok` (`alvazszam`, `rendszam`, `marka`, `tipus`, `szin`, `gydatum`, `uzema`, `hengeru`, `teljesitmeny`, `kep`, `muszakilej`, `forgalome`, `biztositase`, `korozese`, `tulajdonossz`, `motorkod`, `kornyezetved`, `gepjkat`, `utassz`, `valtotip`, `kivitel`, `tomeg`, `vontattomf`, `vontattomfn`) VALUES
+('JH4DC5380TS000111', 'TES789', 'Honda', 'Civic', 'fekete', '2018-11-09', 'benzin', 1498, 129, 'honda-civic.jpg', '2025-12-15', 1, 1, 0, 1, 'L15B7', 'EU6', 'M1', 5, 'automata', 'sedan', 1250, 1000, 500),
+('VF1CLBA0H12345678', 'ABC123', 'Renault', 'Clio', 'piros', '2016-03-14', 'benzin', 1197, 88, 'renault-clio.jpg', '2025-09-30', 1, 1, 0, 2, 'D4F', 'EU5', 'M1', 5, 'manuális', 'ferdehátú', 1090, 900, 450),
+('WAUZZZ8KXCA000222', 'ADM001', 'Audi', 'A4', 'szürke', '2020-05-12', 'dízel', 1968, 150, 'audi-a4.jpg', '2026-08-01', 1, 1, 0, 1, 'DFGA', 'EU6', 'M1', 5, 'automata', 'kombi', 1470, 1700, 750),
+('WAUZZZ8V4GA123456', 'AAAZ675', 'Audi', 'A3 Sportback', 'Fekete', '2016-05-12', 'Benzin', 1395, 110, 'audi-a3.jpg', '2025-07-30', 1, 1, 0, 1, 'CZEA', 'EURO6', 'M1', 5, 'Automata', 'ferdehátú', 1280, NULL, NULL),
+('WVWZZZ1JZXW000001', 'XYZ456', 'Volkswagen', 'Golf', 'fehér', '2010-06-22', 'dízel', 1598, 105, 'golf.jpg', '2026-04-01', 1, 1, 0, 3, 'CAYC', 'EU5', 'M1', 5, 'manuális', 'ferdehátú', 1210, 1300, 600);
 
 -- --------------------------------------------------------
 
@@ -75,7 +74,6 @@ INSERT INTO `autok` (`alvazszam`, `rendszam`, `marka`, `tipus`, `szin`, `gydatum
 CREATE TABLE `felhasznalok` (
   `felhasznalo_id` int(11) NOT NULL COMMENT 'Felhasználó azonosító',
   `felhasznalonev` varchar(50) NOT NULL COMMENT 'Bejelentkezési név',
-  `alvazszam` char(17) DEFAULT NULL COMMENT 'Kocsi alvázszáma (FK)',
   `jelszo` varchar(255) NOT NULL COMMENT 'Felhasználó jelszava',
   `email` varchar(100) DEFAULT NULL COMMENT 'Email cím',
   `szerep` enum('admin','felhasznalo') NOT NULL DEFAULT 'felhasznalo' COMMENT 'Felhasználói szerep'
@@ -85,12 +83,12 @@ CREATE TABLE `felhasznalok` (
 -- A tábla adatainak kiíratása `felhasznalok`
 --
 
-INSERT INTO `felhasznalok` (`felhasznalo_id`, `felhasznalonev`, `alvazszam`, `jelszo`, `email`, `szerep`) VALUES
-(1, 'nagyp35', 'WAUZZZ8V4GA123456', 'nagyp-35', 'nagyp35@gmail.com', 'felhasznalo'),
-(2, 'szabojozsef31', 'JH4DC5380TS000111', 'szabojozsef-31', 'szabojozsef31@gmail.com', 'felhasznalo'),
-(3, 'tothtamas89', 'VF1CLBA0H12345678', 'tothtamas-89', 'tothtamas89@gmail.com', 'felhasznalo'),
-(4, 'szaboem76', 'WAUZZZ8KXCA000222', 'szaboe-76', 'szaboe76@gmail.com', 'felhasznalo'),
-(5, 'molnarjonatan99', NULL, 'molnarjonatan-99', 'molnarjonatan99@gmail.com', 'admin');
+INSERT INTO `felhasznalok` (`felhasznalo_id`, `felhasznalonev`, `jelszo`, `email`, `szerep`) VALUES
+(1, 'nagyp35', 'nagyp-35', 'nagyp35@gmail.com', 'felhasznalo'),
+(2, 'szabojozsef31', 'szabojozsef-31', 'szabojozsef31@gmail.com', 'felhasznalo'),
+(3, 'tothtamas89', 'tothtamas-89', 'tothtamas89@gmail.com', 'felhasznalo'),
+(4, 'szaboem76', 'szaboe-76', 'szaboe76@gmail.com', 'felhasznalo'),
+(5, 'molnarjonatan99', 'molnarjonatan-99', 'molnarjonatan99@gmail.com', 'admin');
 
 -- --------------------------------------------------------
 
@@ -101,21 +99,22 @@ INSERT INTO `felhasznalok` (`felhasznalo_id`, `felhasznalonev`, `alvazszam`, `je
 CREATE TABLE `muszaki_vizsga` (
   `mvid` int(11) NOT NULL COMMENT 'Műszaki vizsga azonositó',
   `alvazszam` char(17) NOT NULL COMMENT 'Kocsi alvázszáma (FK)',
-  `mvdatum` date NOT NULL,
-  `eredmeny` varchar(40) NOT NULL COMMENT 'Műszaki vizsga '
+  `mvdatum` date NOT NULL COMMENT 'Műszaki vizsga dátuma',
+  `eredmeny` varchar(40) NOT NULL COMMENT 'Műszaki vizsga ',
+  `kmallas` int(20) NOT NULL COMMENT 'Kocsi kilóméterállása'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
 -- A tábla adatainak kiíratása `muszaki_vizsga`
 --
 
-INSERT INTO `muszaki_vizsga` (`mvid`, `alvazszam`, `mvdatum`, `eredmeny`) VALUES
-(1, 'WAUZZZ8V4GA123456', '2025-10-01', 'Megfelelt'),
-(2, 'WAUZZZ8V4GA123456', '2025-08-01', 'Nem felelt meg'),
-(3, 'JH4DC5380TS000111', '2024-01-04', 'Megfelelt'),
-(4, 'VF1CLBA0H12345678', '2023-06-03', 'Megfelelt'),
-(5, 'WVWZZZ1JZXW000001', '2025-02-03', 'Megfelelt'),
-(6, 'WAUZZZ8KXCA000222', '2023-07-09', 'Megfelelt');
+INSERT INTO `muszaki_vizsga` (`mvid`, `alvazszam`, `mvdatum`, `eredmeny`, `kmallas`) VALUES
+(1, 'WAUZZZ8V4GA123456', '2025-10-01', 'Megfelelt', 240000),
+(2, 'WAUZZZ8V4GA123456', '2025-08-01', 'Nem felelt meg', 240000),
+(3, 'JH4DC5380TS000111', '2024-01-04', 'Megfelelt', 200000),
+(4, 'VF1CLBA0H12345678', '2023-06-03', 'Megfelelt', 320000),
+(5, 'WVWZZZ1JZXW000001', '2025-02-03', 'Megfelelt', 290000),
+(6, 'WAUZZZ8KXCA000222', '2023-07-09', 'Megfelelt', 185000);
 
 -- --------------------------------------------------------
 
@@ -143,10 +142,10 @@ INSERT INTO `piaci_ar` (`pa_id`, `alvazszam`, `ar`) VALUES
 -- --------------------------------------------------------
 
 --
--- Tábla szerkezet ehhez a táblához `tulajdonlás`
+-- Tábla szerkezet ehhez a táblához `tulajdonlas`
 --
 
-CREATE TABLE `tulajdonlás` (
+CREATE TABLE `tulajdonlas` (
   `tu_id` int(11) NOT NULL COMMENT 'Tulajdonlás id',
   `alvazszam` char(17) NOT NULL COMMENT 'Kocsi alvázszáma (FK)',
   `t_id` int(11) NOT NULL COMMENT 'Tulajdonos azonositó (FK)',
@@ -155,15 +154,16 @@ CREATE TABLE `tulajdonlás` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_hungarian_ci;
 
 --
--- A tábla adatainak kiíratása `tulajdonlás`
+-- A tábla adatainak kiíratása `tulajdonlas`
 --
 
-INSERT INTO `tulajdonlás` (`tu_id`, `alvazszam`, `t_id`, `datumtol`, `datumig`) VALUES
+INSERT INTO `tulajdonlas` (`tu_id`, `alvazszam`, `t_id`, `datumtol`, `datumig`) VALUES
 (1, 'WAUZZZ8V4GA123456', 1, '2025-07-16', '2025-07-24'),
 (2, 'WAUZZZ8V4GA123456', 2, '2025-04-16', '2025-06-24'),
 (3, 'JH4DC5380TS000111', 3, '2012-02-03', '2025-07-02'),
 (4, 'VF1CLBA0H12345678', 4, '2021-05-29', NULL),
-(5, 'WAUZZZ8KXCA000222', 5, '2024-07-08', NULL);
+(5, 'WAUZZZ8KXCA000222', 5, '2024-07-08', NULL),
+(6, 'VF1CLBA0H12345678', 1, '2023-02-03', NULL);
 
 -- --------------------------------------------------------
 
@@ -209,8 +209,7 @@ ALTER TABLE `autok`
 --
 ALTER TABLE `felhasznalok`
   ADD PRIMARY KEY (`felhasznalo_id`),
-  ADD UNIQUE KEY `felhasznalonev` (`felhasznalonev`),
-  ADD KEY `felh-autok` (`alvazszam`);
+  ADD UNIQUE KEY `felhasznalonev` (`felhasznalonev`);
 
 --
 -- A tábla indexei `muszaki_vizsga`
@@ -229,9 +228,9 @@ ALTER TABLE `piaci_ar`
   ADD UNIQUE KEY `alvazszam_2` (`alvazszam`);
 
 --
--- A tábla indexei `tulajdonlás`
+-- A tábla indexei `tulajdonlas`
 --
-ALTER TABLE `tulajdonlás`
+ALTER TABLE `tulajdonlas`
   ADD PRIMARY KEY (`tu_id`),
   ADD KEY `tulajdonlas-autok` (`alvazszam`),
   ADD KEY `tulajdonlas-tulajdonos` (`t_id`);
@@ -265,10 +264,10 @@ ALTER TABLE `piaci_ar`
   MODIFY `pa_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Piaci ár azonositó', AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT a táblához `tulajdonlás`
+-- AUTO_INCREMENT a táblához `tulajdonlas`
 --
-ALTER TABLE `tulajdonlás`
-  MODIFY `tu_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Tulajdonlás id', AUTO_INCREMENT=6;
+ALTER TABLE `tulajdonlas`
+  MODIFY `tu_id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'Tulajdonlás id', AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT a táblához `tulajdonos`
@@ -279,12 +278,6 @@ ALTER TABLE `tulajdonos`
 --
 -- Megkötések a kiírt táblákhoz
 --
-
---
--- Megkötések a táblához `felhasznalok`
---
-ALTER TABLE `felhasznalok`
-  ADD CONSTRAINT `felh-autok` FOREIGN KEY (`alvazszam`) REFERENCES `autok` (`alvazszam`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `muszaki_vizsga`
@@ -299,9 +292,9 @@ ALTER TABLE `piaci_ar`
   ADD CONSTRAINT `pa-autók` FOREIGN KEY (`alvazszam`) REFERENCES `autok` (`alvazszam`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Megkötések a táblához `tulajdonlás`
+-- Megkötések a táblához `tulajdonlas`
 --
-ALTER TABLE `tulajdonlás`
+ALTER TABLE `tulajdonlas`
   ADD CONSTRAINT `tulajdonlas-autok` FOREIGN KEY (`alvazszam`) REFERENCES `autok` (`alvazszam`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `tulajdonlas-tulajdonos` FOREIGN KEY (`t_id`) REFERENCES `tulajdonos` (`t_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
