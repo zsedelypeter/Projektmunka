@@ -114,7 +114,23 @@ INSERT INTO `muszaki_vizsga` (`mvid`, `alvazszam`, `mvdatum`, `eredmeny`, `kmall
 (3, 'JH4DC5380TS000111', '2024-01-04', 'Megfelelt', 200000),
 (4, 'VF1CLBA0H12345678', '2023-06-03', 'Megfelelt', 320000),
 (5, 'WVWZZZ1JZXW000001', '2025-02-03', 'Megfelelt', 290000),
-(6, 'WAUZZZ8KXCA000222', '2023-07-09', 'Megfelelt', 185000);
+(6, 'WAUZZZ8KXCA000222', '2023-07-09', 'Megfelelt', 185000),
+(7, 'WAUZZZ8V4GA123456', '2021-08-05', 'Megfelelt', 140000),
+(8, 'WAUZZZ8V4GA123456', '2019-07-30', 'Megfelelt', 100000),
+(9, 'JH4DC5380TS000111', '2022-01-03', 'Megfelelt', 180000),
+(10, 'JH4DC5380TS000111', '2020-01-05', 'Megfelelt', 240000),
+(11, 'JH4DC5380TS000111', '2018-01-09', 'Megfelelt', 190000),
+(12, 'VF1CLBA0H12345678', '2025-06-09', 'Nem felelt meg', 350000),
+(13, 'VF1CLBA0H12345678', '2021-06-02', 'Megfelelt', 270000),
+(14, 'VF1CLBA0H12345678', '2019-06-05', 'Megfelelt', 235000),
+(15, 'WAUZZZ8KXCA000222', '2025-10-03', 'Megfelelt', 200000),
+(16, 'WAUZZZ8V4GA123456', '2023-10-28', 'Megfelelt', 176000),
+(17, 'WAUZZZ8KXCA000222', '2023-10-22', 'Nem felelt meg', 176000),
+(18, 'WAUZZZ8KXCA000222', '2021-10-09', 'Megfelelt', 140000),
+(19, 'WAUZZZ8KXCA000222', '2019-10-10', 'Megfelelt', 90000),
+(20, 'WVWZZZ1JZXW000001', '2023-02-02', 'Megfelelt', 240000),
+(21, 'WVWZZZ1JZXW000001', '2021-02-15', 'Megfelelt', 200000),
+(22, 'WVWZZZ1JZXW000001', '2019-02-01', 'Megfelelt', 170000);
 
 -- --------------------------------------------------------
 
