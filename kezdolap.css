@@ -1,5 +1,7 @@
 body{
-    background-image: url('icegif-153.gif');
+    background-image: 
+      linear-gradient(to bottom, rgba(255,255,255,0) 85%, white 100%),
+      url('icegif-153.gif');
     background-size:cover;
     background-attachment: fixed;
     background-position: center 15px;
@@ -9,12 +11,11 @@ body{
 }
 
 
-.header-box {
+.fejlec {
     width: 100%;
+    height: 65px;
     background-color: white;
-    padding: 10px;
     box-shadow: 0 10px 10px rgba(0,0,0,0.1);
-    margin-bottom: 15px;
     box-sizing: border-box;
     position: relative;
     display: flex;
@@ -22,21 +23,21 @@ body{
     justify-content: space-between; 
 }
 
-.header-buttons {
+.bejelentkezes_gomb {
     font-size: medium;
     position: absolute;
     right: 15px;
     top: 50%;
     transform: translateY(-50%);
     display: flex;
-    gap: 10px;
 }
 
 h1{
+  font-size: 45px;
+    font-weight: bold;
     color:#1F2937;
     font-family:inter;
     text-shadow: #1F2937 1px 1px 2px;
-    text-align: left;
     position: relative;
     padding-left: 15px
 
@@ -47,7 +48,7 @@ form {
     -webkit-backdrop-filter: blur(10px) saturate(180%);
     border: 1px solid rgba(255,255,255,0.2);
     width: 500px;
-    height: 350px;
+    height: 300px;
     padding: 10px;
     border-radius:10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -55,7 +56,6 @@ form {
     color:#FFFFFF;
     text-align:center;
     margin: 150px auto;
-
 }
 
 p {
@@ -76,15 +76,13 @@ p {
     text-align: center;
 }
 
-input[type="submit"], .register-button {
+input[type="submit"],.bejelentkezes_gombja {
     margin: 10px 10px; 
     padding: 5px 20px;
-    width: 150px;
-    length: 50px;
     background-color: #FFFFFF;
     color: #1F2937;
     text-decoration: none;
-    border-radius: 10px;
+    border-radius: 15px;
     font-weight: bold;
     border: none;
     cursor: pointer;
@@ -95,12 +93,9 @@ input[type="submit"], .register-button {
 }
 
 label[for="rendszam"], label[for="alvazszam"] {
-  font-size: 20px;
+  font-size: 30px;
     font-weight: bold;
-  padding-top: 10px;
   font-family: 'Zalando Sans Expanded', sans-serif;
-  display: block;
-    margin-bottom: 0px;
 }
 
 #rendszam {
@@ -122,7 +117,7 @@ label[for="rendszam"], label[for="alvazszam"] {
 }
 
 #rendszam:focus {
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  box-shadow: 0 0 25px rgba(0,0,0,6);
 }
 
 #alvazszam {
@@ -143,13 +138,31 @@ label[for="rendszam"], label[for="alvazszam"] {
   transition: all 0.3s ease;
 }
 
-#alvatszam :focus {
-  box-shadow: 0 0 15px rgba(0,0,0,0.4);
+#alvazszam:focus {
+  box-shadow: 0 0 25px rgba(0,0,0,6);
 }
 
-input[type="submit"]:hover, .register-button:hover {
+input[type="submit"]:hover, .bejelentkezes_gombja:hover {
     transform: scale(1.05);
     background-color: #1F2937;
     color: #FFFFFF;
     box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.footer {
+    width: 100%;
+    height: 80px;
+    background-color: #1F2937;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.footer a img {
+    width: 40px;
+    height: 40px;
 }
