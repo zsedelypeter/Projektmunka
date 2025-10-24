@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    $_SESSION["isloggedin"] = isset($_SESSION["username"]);
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -9,7 +14,12 @@
         <div class="fejlec">
             <h1>Bengo</h1>
             <div class="bejelentkezes_gomb">
-                <a href="login.html" class="bejelentkezes_gombja">Bejelentkezés <a href=""></a>
+                <?php if ($_SESSION["isloggedin"]): ?>
+                    <?php echo "<h3>" . $_SESSION["username"] . "</h3>" ?>
+                    <a href="logout.php" class="bejelentkezes_gombja">Kijelentkezés</a>
+                <?php else: ?>
+                    <a href="login.html" class="bejelentkezes_gombja">Bejelentkezés</a>
+                <?php endif; ?>
             </div>
         </div>
         <p>Tudd meg pillanatok alatt, mi rejlik a rendszám mögött!<br>
@@ -27,13 +37,13 @@
         </form>
          <footer class="footer">
             <a href="https://twitter.com" target="_blank">
-                <img src="twitter-logo.png" alt="Twitter">
+                <img src="img/twitter-logo.png" alt="Twitter">
             </a>
             <a href="https://facebook.com" target="_blank">
-                <img src="facebook.png" alt="Facebook">
+                <img src="img/facebook.png" alt="Facebook">
             </a>
              <a href="https://github.com/zsedelypeter/Projektmunka" target="_blank">
-                 <img src="github.png" alt="GitHub">
+                 <img src="img/github.png" alt="GitHub">
             </a>
         </footer>
     </body>

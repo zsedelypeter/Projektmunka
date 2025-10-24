@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -12,6 +15,8 @@ if ($conn->connect_error) {
 $username = $_POST["username"];
 $password = $_POST["password"];
 
+$_SESSION["username"] = $username;
+
 $sql = "SELECT felhasznalonev FROM felhasznalok WHERE felhasznalonev = ? AND jelszo = ?";
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("ss", $username, $password);
@@ -19,7 +24,7 @@ $stmt->execute();
 $result = $stmt->get_result();
 if ($result->num_rows > 0) {
 
-    header("Location: kezdolap.html");
+    header("Location: kezdolap.php");
 } else {
     echo "Kristóf egy zebra!";
 }
