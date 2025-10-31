@@ -34,7 +34,6 @@
     } else {
         $sql = 'SELECT a.rendszam, a.alvazszam, a.marka, a.tipus, a.szin, a.gydatum, a.uzema, a.hengeru, a.teljesitmeny, a.kep, m.kmallas, m.mvdatum FROM autok a LEFT JOIN muszaki_vizsga m ON a.alvazszam = m.alvazszam WHERE a.rendszam = ? OR a.alvazszam = ? ORDER BY m.mvdatum DESC';
     }
-    
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $rendszam, $alvazszam);
     $stmt->execute();
@@ -51,28 +50,38 @@
             }
         }
     }
+    
+    // Ha nincs kiválasztott év, akkor az első elérhető dátumot választjuk ki alapértelmezettként, így betölti az oldal az adatokat, nem pedig csak üresen hagyja az oldalt
+    if ($selected_year === null) {
+        $selected_year = $dates[0];
+    }
     ?>
-
+    
     <body>
         <form action="rendszamlekeres.php" method="POST">
             <input type="hidden" name="rendszam" value="<?= $rendszam ?>">
             <input type="hidden" name="alvazszam" value="<?= $alvazszam ?>">
             <select id="yearselect" name="selected_year">
-                <option value="dummy">Válassza ki a műszaki vizsga évét!</option>
             </select>
         </form>
         
         <script>
             //A dropdopwn menüben csak az autóhoz tartozó dátumok legyenek
+            const selected_year = <?= json_encode($selected_year) ;?>;
             const yeardropdown = document.getElementById("yearselect");
             const yeardata = <?= json_encode($dates);?>;
             for (i=0; i<yeardata.length; i++){
                 let option = document.createElement("option");
                 option.setAttribute('value', yeardata[i]);
                 let optionText = document.createTextNode(yeardata[i]);
+                
                 option.appendChild(optionText);
+                if (yeardata[i] === selected_year){
+                    option.selected = true;
+                }
                 yeardropdown.appendChild(option);
             }
+            yeardropdown.dispatchEvent(new Event("change"))
             yeardropdown.addEventListener("change", autosubmit);
             let selectDate;
             function autosubmit(){
