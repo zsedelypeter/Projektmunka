@@ -158,5 +158,35 @@
 
 
     ?>
+    <!--Diagram-->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <div id="Diagram"></div>
+    <script>
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        function drawChart(){
+            const all_rows = <?= json_encode($all_rows);?>;
+            const dataArray = [];
+            all_rows.forEach(element => {
+                if (element.mvdatum && element.kmallas){
+                    dataArray.push([element.mvdatum, element.kmallas]);
+                }
+            });
+            dataArray.reverse();
+            dataArray.splice(0, 0, ['Dátum', 'Kilóméteróra állása']);
+            const data = google.visualization.arrayToDataTable(dataArray);
+            const options = {
+                title: 'Kilóméteróra állásának változása az idő során',
+                hAxis: {title: 'Dátum'},
+                vAxis: {title: 'Kilóméteróra állása'},
+                legend: 'none',
+                pointSize: 15,
+            };
+
+            const chart = new google.visualization.LineChart(document.getElementById("Diagram"));
+            chart.draw(data, options);
+        }
+    </script>
     </body>
 </html>
