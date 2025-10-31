@@ -14,10 +14,7 @@
     $password = "";
     $dbname = "Projekt";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-    }     
+        
 
     $rendszam = $_POST["rendszam"];
     $alvazszam = $_POST["alvazszam"];
@@ -26,30 +23,49 @@
          $selected_year = $_POST["selected_year"];
     }
    
-    
-    
-    //Lekérdezés attól függően, hogy be e vagyunk jelentkezve
-    if ($_SESSION["isloggedin"]){
-        $sql = 'SELECT a.rendszam, a.alvazszam, a.marka, a.tipus, a.szin, a.gydatum, a.uzema, a.hengeru, a.teljesitmeny, a.kep, m.kmallas, a.muszakilej, a.forgalome, a.biztositase, a.korozese, a.tulajdonossz, a.motorkod, a.kornyezetved, a.gepjkat, a.utassz, a.valtotip, a.kivitel, a.tomeg, a.vontattomf, a.vontattomfn, m.mvdatum, m.eredmeny FROM autok a LEFT JOIN muszaki_vizsga m ON a.alvazszam = m.alvazszam WHERE a.rendszam = ? OR a.alvazszam = ? ORDER BY m.mvdatum DESC';
-    } else {
-        $sql = 'SELECT a.rendszam, a.alvazszam, a.marka, a.tipus, a.szin, a.gydatum, a.uzema, a.hengeru, a.teljesitmeny, a.kep, m.kmallas, m.mvdatum FROM autok a LEFT JOIN muszaki_vizsga m ON a.alvazszam = m.alvazszam WHERE a.rendszam = ? OR a.alvazszam = ? ORDER BY m.mvdatum DESC';
-    }
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ss", $rendszam, $alvazszam);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    //Az év kiválasztáshoz a dátumok begyűjtése és az összes adat tárolása (ezt így kell mert máshogy nem jó, pointer egyszer átmegy az adatokon vissza nem lehet állítani)
-    $dates = [];
-    $all_rows = [];
-    if ($result->num_rows > 0) {
-        while($row = $result->fetch_assoc()) {
-            $all_rows[] = $row;
-            if ($row["mvdatum"]) {
-                $dates[] = $row["mvdatum"];
+    $saved = implode([$rendszam, $alvazszam]);
+
+
+    //Ha már rákerestünk erre az autóra, akkor nem csinálunk újabb lekérdezést, hanem a régiből dolgozunk, ha pedig új autóra keresünk, elmentjük a lekérdezés eredményét emiatt
+    if (!isset($_SESSION[$saved])){
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+        }
+        //Lekérdezés attól függően, hogy be e vagyunk jelentkezve
+        if ($_SESSION["isloggedin"]){
+            $sql = 'SELECT a.rendszam, a.alvazszam, a.marka, a.tipus, a.szin, a.gydatum, a.uzema, a.hengeru, a.teljesitmeny, a.kep, m.kmallas, a.muszakilej, a.forgalome, a.biztositase, a.korozese, a.tulajdonossz, a.motorkod, a.kornyezetved, a.gepjkat, a.utassz, a.valtotip, a.kivitel, a.tomeg, a.vontattomf, a.vontattomfn, m.mvdatum, m.eredmeny FROM autok a LEFT JOIN muszaki_vizsga m ON a.alvazszam = m.alvazszam WHERE a.rendszam = ? OR a.alvazszam = ? ORDER BY m.mvdatum DESC';
+        } else {
+            $sql = 'SELECT a.rendszam, a.alvazszam, a.marka, a.tipus, a.szin, a.gydatum, a.uzema, a.hengeru, a.teljesitmeny, a.kep, m.kmallas, m.mvdatum FROM autok a LEFT JOIN muszaki_vizsga m ON a.alvazszam = m.alvazszam WHERE a.rendszam = ? OR a.alvazszam = ? ORDER BY m.mvdatum DESC';
+        }
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ss", $rendszam, $alvazszam);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        
+        //Az év kiválasztáshoz a dátumok begyűjtése és az összes adat tárolása (ezt így kell mert máshogy nem jó, pointer egyszer átmegy az adatokon vissza nem lehet állítani)
+        $dates = [];
+        $all_rows = [];
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                $all_rows[] = $row;
+                if ($row["mvdatum"]) {
+                    $dates[] = $row["mvdatum"];
+                }
             }
         }
+        $_SESSION[$saved] = [
+            'dates' => $dates,
+            'all_rows' => $all_rows
+        ];
+        $conn->close();
+    } else{
+        $dates = $_SESSION[$saved]["dates"];
+        $all_rows = $_SESSION[$saved]["all_rows"];
     }
+
+    
+    
     
     // Ha nincs kiválasztott év, akkor az első elérhető dátumot választjuk ki alapértelmezettként, így betölti az oldal az adatokat, nem pedig csak üresen hagyja az oldalt
     if ($selected_year === null) {
@@ -141,7 +157,6 @@
     }
 
 
-    $conn->close();
     ?>
     </body>
 </html>
