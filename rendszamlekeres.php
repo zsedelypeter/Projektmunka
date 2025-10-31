@@ -21,12 +21,18 @@
 
     $rendszam = $_POST["rendszam"];
     $alvazszam = $_POST["alvazszam"];
+    $selected_year = null;
+    if (isset($_POST["selected_year"])){
+         $selected_year = $_POST["selected_year"];
+    }
+   
+    
     
     //Lekérdezés attól függően, hogy be e vagyunk jelentkezve
     if ($_SESSION["isloggedin"]){
-        $sql = 'SELECT a.rendszam, a.alvazszam, a.marka, a.tipus, a.szin, a.gydatum, a.uzema, a.hengeru, a.teljesitmeny, a.kep, m.kmallas, a.muszakilej, a.forgalome, a.biztositase, a.korozese, a.tulajdonossz, a.motorkod, a.kornyezetved, a.gepjkat, a.utassz, a.valtotip, a.kivitel, a.tomeg, a.vontattomf, a.vontattomfn, m.mvdatum, m.eredmeny FROM autok a LEFT JOIN muszaki_vizsga m ON a.alvazszam = m.alvazszam WHERE a.rendszam = ? OR a.alvazszam = ? ';
+        $sql = 'SELECT a.rendszam, a.alvazszam, a.marka, a.tipus, a.szin, a.gydatum, a.uzema, a.hengeru, a.teljesitmeny, a.kep, m.kmallas, a.muszakilej, a.forgalome, a.biztositase, a.korozese, a.tulajdonossz, a.motorkod, a.kornyezetved, a.gepjkat, a.utassz, a.valtotip, a.kivitel, a.tomeg, a.vontattomf, a.vontattomfn, m.mvdatum, m.eredmeny FROM autok a LEFT JOIN muszaki_vizsga m ON a.alvazszam = m.alvazszam WHERE a.rendszam = ? OR a.alvazszam = ? ORDER BY m.mvdatum DESC';
     } else {
-        $sql = 'SELECT a.rendszam, a.alvazszam, a.marka, a.tipus, a.szin, a.gydatum, a.uzema, a.hengeru, a.teljesitmeny, a.kep, m.kmallas FROM autok a LEFT JOIN muszaki_vizsga m ON a.alvazszam = m.alvazszam WHERE a.rendszam = ? OR a.alvazszam = ? ';
+        $sql = 'SELECT a.rendszam, a.alvazszam, a.marka, a.tipus, a.szin, a.gydatum, a.uzema, a.hengeru, a.teljesitmeny, a.kep, m.kmallas, m.mvdatum FROM autok a LEFT JOIN muszaki_vizsga m ON a.alvazszam = m.alvazszam WHERE a.rendszam = ? OR a.alvazszam = ? ORDER BY m.mvdatum DESC';
     }
     
     $stmt = $conn->prepare($sql);
@@ -45,15 +51,19 @@
             }
         }
     }
-
     ?>
 
     <body>
-        <select id="yearselect">
-            
-        </select>
-
+        <form action="rendszamlekeres.php" method="POST">
+            <input type="hidden" name="rendszam" value="<?= $rendszam ?>">
+            <input type="hidden" name="alvazszam" value="<?= $alvazszam ?>">
+            <select id="yearselect" name="selected_year">
+                <option value="dummy">Válassza ki a műszaki vizsga évét!</option>
+            </select>
+        </form>
+        
         <script>
+            //A dropdopwn menüben csak az autóhoz tartozó dátumok legyenek
             const yeardropdown = document.getElementById("yearselect");
             const yeardata = <?= json_encode($dates);?>;
             for (i=0; i<yeardata.length; i++){
@@ -63,15 +73,23 @@
                 option.appendChild(optionText);
                 yeardropdown.appendChild(option);
             }
+            yeardropdown.addEventListener("change", autosubmit);
+            let selectDate;
+            function autosubmit(){
+                if(this.value != "dummy"){
+                    this.form.submit();
+                }
+            }
         </script>
 
 
     <?php
     //Kiiratás
     if (count($all_rows) > 0) {
-        $first_row = true;
+        $firstRow = true;
         foreach($all_rows as $row) {
-            if ($first_row) {
+            if ($row["mvdatum"] == $selected_year) {
+                if ($firstRow){
                 echo "<h3>Autó adatok:</h3>";
                 echo "Rendszám: " . $row["rendszam"] . "<br>";
                 echo "Alvázszám: " . $row["alvazszam"] . "<br>";
@@ -84,6 +102,7 @@
                 echo "Teljesítmény: " . $row["teljesitmeny"] . "<br>";
                 echo "Kép: <br><div class='image_container'><img src='img/" . $row["kep"] . "' alt='" . $row["kep"] . "'></div><br>";
                 echo "Kilométeróra állás: " . $row["kmallas"] . "<br>";
+                echo "Műszaki vizsga dátuma: " . $row["mvdatum"] . "<br>";
                 
                 //Ha be van jelentkezve
                 if ($_SESSION["isloggedin"]) {
@@ -104,8 +123,8 @@
                     echo "Műszaki vizsga dátuma: " . $row["mvdatum"] . "<br>";
                     echo "Műszaki vizsga eredménye: " . $row["eredmeny"] . "<br>";
                 }
-                
-                $first_row = false;
+                $firstRow = false;
+                }
             }
         }
     } else {
