@@ -6,9 +6,21 @@
 <html>
     <head>
         <title>Kristóf</title>
-        <link rel="stylesheet" href="login_front.css">
+        <link rel="stylesheet" href="rendszamlekeres_front.css">
     </head>
-    <?php
+    <body>
+        <div class="fejlec">
+            <h1>Bengo</h1>
+            <div class="bejelentkezes_gomb"> 
+                <?php if ($_SESSION["isloggedin"]): ?> 
+                <?php echo "<h3>" . $_SESSION["username"] . "</h3>" ?> 
+                <a href="logout.php" class="bejelentkezes_gombja">Kijelentkezés</a> 
+                <?php else: ?> 
+                <a href="login.html" class="bejelentkezes_gombja">Bejelentkezés</a> 
+                <?php endif; ?> </div> 
+            </div> 
+        </body> 
+                <?php
     $servername = "localhost";
     $username = "root";
     $password = "";
@@ -72,9 +84,98 @@
         $selected_year = $dates[0];
     }
     ?>
-    
-    <body>
-        <form action="rendszamlekeres.php" method="POST">
+</div>
+    <?php
+    //Kiiratás
+    if (count($all_rows) > 0) {
+        $firstRow = true;
+        foreach($all_rows as $row) {
+            if ($row["mvdatum"] == $selected_year) {
+                if ($firstRow){
+                echo "<h3>Az autó specifikációi</h3>";
+                echo "<div class='row'>";
+                echo "<div class='item'><img src='img/rendszamtabla.png' alt='Rendszámtábla'> Rendszám: " . $row["rendszam"] . "</div>";
+                echo "<div class='item'><img src='img/rendszamtabla.png' alt='Alvázszám'> Alvázszám: " . $row["alvazszam"] . "</div>";
+                echo "<div class='item'><img src='img/Gyártó.png' alt='Gyártó'> Gyártó: " . $row["marka"] . "</div>";
+                echo "<div class='item'><img src='img/Típus.png' alt='Típus'> Típus: " . $row["tipus"] . "</div>";
+                echo "</div>";
+                echo "<div class='row'>";
+                echo "<div class='item'><img src='img/Szín.png' alt='Szín'> Szín: " . $row["szin"] . "</div>";
+                echo "<div class='item'><img src='img/gy_dátum.png' alt='Gyártás dátuma'> Gyártás dátuma: " . $row["gydatum"] . "</div>";
+                echo "<div class='item'><img src='img/Üzemanyag.png' alt='Üzemanyag'> Üzemanyag típusa: " . $row["uzema"] . "</div>";
+                echo "<div class='item'><img src='img/Motor.png' alt='Hengerűrtartalom'> Hengerűrtartalom: " . $row["hengeru"] . "</div>";
+                echo "</div>";
+                echo "<div class='row'>";
+                echo "<div class='item'><img src='img/Motor.png' alt='Teljesítmény'> Teljesítmény: " . $row["teljesitmeny"] . "</div>";
+                echo "</div>";
+                echo "</div>";
+                ?>
+                 <!--Diagram-->
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <div id="Diagram"></div>
+    <script>
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        function drawChart(){
+            const all_rows = <?= json_encode($all_rows);?>;
+            const dataArray = [];
+            all_rows.forEach(element => {
+                if (element.mvdatum && element.kmallas){
+                    dataArray.push([element.mvdatum, element.kmallas]);
+                }
+            });
+            dataArray.reverse();
+            dataArray.splice(0, 0, ['Dátum', 'Kilóméteróra állása']);
+            const data = google.visualization.arrayToDataTable(dataArray);
+            const options = {
+                title: 'Kilóméteróra állásának változása az idő során',
+                hAxis: {title: 'Dátum'},
+                vAxis: {title: 'Kilóméteróra állása'},
+                legend: 'none',
+                pointSize: 15,
+                backgroundColor: 'transparent',
+            };
+
+            const chart = new google.visualization.LineChart(document.getElementById("Diagram"));
+            chart.draw(data, options);
+        }
+    </script>
+                <?php
+                echo "<p>Kép</p> <br><div class='image_container'><img src='img/" . $row["kep"] . "' alt='" . $row["kep"] . "'></div><br>";
+                echo "<li>Kilométeróra állás: " . $row["kmallas"] . "</li>";
+                echo "<li>Műszaki vizsga dátuma: " . $row["mvdatum"] . "</li>";
+                echo "</ul>";
+                //Ha be van jelentkezve
+                if ($_SESSION["isloggedin"]) {
+                    echo "Műszaki lejárat: " . $row["muszakilej"] . "<br>";
+                    echo "Forgalmi engedély: " . $row["forgalome"] . "<br>";
+                    echo "Biztosítás: " . $row["biztositase"] . "<br>";
+                    echo "Korrózió: " . $row["korozese"] . "<br>";
+                    echo "Tulajdonosok száma: " . $row["tulajdonossz"] . "<br>";
+                    echo "Motorkód: " . $row["motorkod"] . "<br>";
+                    echo "Környézetvédelmi osztály: " . $row["kornyezetved"] . "<br>";
+                    echo "Gépjármű kategória: " . $row["gepjkat"] . "<br>";
+                    echo "Utasok száma: " . $row["utassz"] . "<br>";
+                    echo "Váltó típus: " . $row["valtotip"] . "<br>";
+                    echo "Kivitel: " . $row["kivitel"] . "<br>";
+                    echo "Tömeg: " . $row["tomeg"] . "<br>";
+                    echo "Vontatott tömeg fékkel: " . $row["vontattomf"] . "<br>";
+                    echo "Vontatott tömeg fék nélkül: " . $row["vontattomfn"] . "<br>";
+                    echo "Műszaki vizsga dátuma: " . $row["mvdatum"] . "<br>";
+                    echo "Műszaki vizsga eredménye: " . $row["eredmeny"] . "<br>";
+                }
+                $firstRow = false;
+                }
+            }
+        }
+    } else {
+        echo "Nincs ilyen!";
+    }
+
+
+    ?>
+    <form action="rendszamlekeres.php" method="POST">
             <input type="hidden" name="rendszam" value="<?= $rendszam ?>">
             <input type="hidden" name="alvazszam" value="<?= $alvazszam ?>">
             <select id="yearselect" name="selected_year">
@@ -106,87 +207,5 @@
                 }
             }
         </script>
-
-
-    <?php
-    //Kiiratás
-    if (count($all_rows) > 0) {
-        $firstRow = true;
-        foreach($all_rows as $row) {
-            if ($row["mvdatum"] == $selected_year) {
-                if ($firstRow){
-                echo "<h3>Autó adatok:</h3>";
-                echo "Rendszám: " . $row["rendszam"] . "<br>";
-                echo "Alvázszám: " . $row["alvazszam"] . "<br>";
-                echo "Márka: " . $row["marka"] . "<br>";
-                echo "Típus: " . $row["tipus"] . "<br>";
-                echo "Szín: " . $row["szin"] . "<br>";
-                echo "Gyártási dátum: " . $row["gydatum"] . "<br>";
-                echo "Üzemanyag: " . $row["uzema"] . "<br>";
-                echo "Hengerűrtartalom: " . $row["hengeru"] . "<br>";
-                echo "Teljesítmény: " . $row["teljesitmeny"] . "<br>";
-                echo "Kép: <br><div class='image_container'><img src='img/" . $row["kep"] . "' alt='" . $row["kep"] . "'></div><br>";
-                echo "Kilométeróra állás: " . $row["kmallas"] . "<br>";
-                echo "Műszaki vizsga dátuma: " . $row["mvdatum"] . "<br>";
-                
-                //Ha be van jelentkezve
-                if ($_SESSION["isloggedin"]) {
-                    echo "Műszaki lejárat: " . $row["muszakilej"] . "<br>";
-                    echo "Forgalmi engedély: " . $row["forgalome"] . "<br>";
-                    echo "Biztosítás: " . $row["biztositase"] . "<br>";
-                    echo "Korrózió: " . $row["korozese"] . "<br>";
-                    echo "Tulajdonosok száma: " . $row["tulajdonossz"] . "<br>";
-                    echo "Motorkód: " . $row["motorkod"] . "<br>";
-                    echo "Környézetvédelmi osztály: " . $row["kornyezetved"] . "<br>";
-                    echo "Gépjármű kategória: " . $row["gepjkat"] . "<br>";
-                    echo "Utasok száma: " . $row["utassz"] . "<br>";
-                    echo "Váltó típus: " . $row["valtotip"] . "<br>";
-                    echo "Kivitel: " . $row["kivitel"] . "<br>";
-                    echo "Tömeg: " . $row["tomeg"] . "<br>";
-                    echo "Vontatott tömeg fékkel: " . $row["vontattomf"] . "<br>";
-                    echo "Vontatott tömeg fék nélkül: " . $row["vontattomfn"] . "<br>";
-                    echo "Műszaki vizsga dátuma: " . $row["mvdatum"] . "<br>";
-                    echo "Műszaki vizsga eredménye: " . $row["eredmeny"] . "<br>";
-                }
-                $firstRow = false;
-                }
-            }
-        }
-    } else {
-        echo "Nincs ilyen!";
-    }
-
-
-    ?>
-    <!--Diagram-->
-    <script src="https://www.gstatic.com/charts/loader.js"></script>
-    <div id="Diagram"></div>
-    <script>
-        google.charts.load('current', {'packages':['corechart']});
-        google.charts.setOnLoadCallback(drawChart);
-        
-        function drawChart(){
-            const all_rows = <?= json_encode($all_rows);?>;
-            const dataArray = [];
-            all_rows.forEach(element => {
-                if (element.mvdatum && element.kmallas){
-                    dataArray.push([element.mvdatum, element.kmallas]);
-                }
-            });
-            dataArray.reverse();
-            dataArray.splice(0, 0, ['Dátum', 'Kilóméteróra állása']);
-            const data = google.visualization.arrayToDataTable(dataArray);
-            const options = {
-                title: 'Kilóméteróra állásának változása az idő során',
-                hAxis: {title: 'Dátum'},
-                vAxis: {title: 'Kilóméteróra állása'},
-                legend: 'none',
-                pointSize: 15,
-            };
-
-            const chart = new google.visualization.LineChart(document.getElementById("Diagram"));
-            chart.draw(data, options);
-        }
-    </script>
     </body>
 </html>

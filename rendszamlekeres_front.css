@@ -1,0 +1,110 @@
+body{
+    background: linear-gradient(to top ,rgb(29, 116, 187), rgb(74, 169, 201));
+    background-repeat: :no-repeat;
+    margin: 0;
+    padding: 0;
+}
+
+
+.fejlec {
+    width: 100%;
+    height: 65px;
+    margin: 0px;
+    background-color: white;
+    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}
+input[type="submit"],.bejelentkezes_gombja {
+    margin: 10px 10px; 
+    padding: 5px 20px;
+    background-color: #FFFFFF;
+    color: #1F2937;
+    text-decoration: none;
+    border-radius: 15px;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    transition: all 0.3s ease;
+    transform: scale(1);
+    font-size: 20px;
+}
+input[type="submit"]:hover, .bejelentkezes_gombja:hover {
+    transform: scale(1.05);
+    background-color: #1F2937;
+    color: #FFFFFF;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+h1{
+  font-size: 45px;
+    font-weight: bold;
+    color:#1F2937;
+    font-family:inter;
+    text-shadow: #1F2937 1px 1px 2px;
+    position: relative;
+    padding-left: 15px
+}
+
+h3{
+    color: rgb(0, 0, 0);
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    text-align: left;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.row .item {
+    font-size: large;
+    font-weight: bold;
+    flex: 1 1 22%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    padding-left: 3%;
+    padding-top: 1%;
+    border-radius: 10px;
+    box-sizing: border-box;
+    text-align: left; 
+}
+.row .item img {
+    width: 30px;
+    height: 30px;
+}
+ul{
+    list-style-type: none;
+    padding: 0;
+}
+select{
+    background: rgba(31, 41, 55, 0.4);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.2);
+    width: 200px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 10px;
+    padding-left: 10px;
+    font-family: 'Zalando Sans Expanded', sans-serif;
+    margin-top: 10px;
+}
+
+#Diagram{
+    height: 400px;
+    width: 90%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    background-color: #FFFFFF;
+    display: flex
+    justify-content: center;
+    margin: 20px auto;
+}
