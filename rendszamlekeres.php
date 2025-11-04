@@ -92,23 +92,25 @@
         foreach($all_rows as $row) {
             if ($row["mvdatum"] == $selected_year) {
                 if ($firstRow){
-                echo "<h3>Az autó specifikációi</h3>";
-                echo "<div class='row'>";
-                echo "<div class='item'><img src='img/rendszamtabla.png' alt='Rendszámtábla'> Rendszám: " . $row["rendszam"] . "</div>";
-                echo "<div class='item'><img src='img/rendszamtabla.png' alt='Alvázszám'> Alvázszám: " . $row["alvazszam"] . "</div>";
-                echo "<div class='item'><img src='img/Gyártó.png' alt='Gyártó'> Gyártó: " . $row["marka"] . "</div>";
-                echo "<div class='item'><img src='img/Típus.png' alt='Típus'> Típus: " . $row["tipus"] . "</div>";
-                echo "</div>";
-                echo "<div class='row'>";
-                echo "<div class='item'><img src='img/Szín.png' alt='Szín'> Szín: " . $row["szin"] . "</div>";
-                echo "<div class='item'><img src='img/gy_dátum.png' alt='Gyártás dátuma'> Gyártás dátuma: " . $row["gydatum"] . "</div>";
-                echo "<div class='item'><img src='img/Üzemanyag.png' alt='Üzemanyag'> Üzemanyag típusa: " . $row["uzema"] . "</div>";
-                echo "<div class='item'><img src='img/Motor.png' alt='Hengerűrtartalom'> Hengerűrtartalom: " . $row["hengeru"] . "</div>";
-                echo "</div>";
-                echo "<div class='row'>";
-                echo "<div class='item'><img src='img/Motor.png' alt='Teljesítmény'> Teljesítmény: " . $row["teljesitmeny"] . "</div>";
-                echo "</div>";
-                echo "</div>";
+                    echo "<div class='auto_adatok'>";
+                    echo "<h3>Az autó specifikációi</h3>";
+                    echo "<div class='row'>";
+                    echo "<div class='item'><img src='img/rendszamtabla.png' alt='Rendszámtábla'> Rendszám: " . $row["rendszam"] . "</div>";
+                    echo "<div class='item'><img src='img/rendszamtabla.png' alt='Alvázszám'> Alvázszám: " . $row["alvazszam"] . "</div>";
+                    echo "<div class='item'><img src='img/Gyártó.png' alt='Gyártó'> Gyártó: " . $row["marka"] . "</div>";
+                    echo "<div class='item'><img src='img/Típus.png' alt='Típus'> Típus: " . $row["tipus"] . "</div>";
+                    echo "</div>";
+                    echo "<div class='row'>";
+                    echo "<div class='item'><img src='img/Szín.png' alt='Szín'> Szín: " . $row["szin"] . "</div>";
+                    echo "<div class='item'><img src='img/gy_dátum.png' alt='Gyártás dátuma'> Gyártás dátuma: " . $row["gydatum"] . "</div>";
+                    echo "<div class='item'><img src='img/Üzemanyag.png' alt='Üzemanyag'> Üzemanyag típusa: " . $row["uzema"] . "</div>";
+                    echo "<div class='item'><img src='img/Motor.png' alt='Hengerűrtartalom'> Hengerűrtartalom: " . $row["hengeru"] . "</div>";
+                    echo "</div>";
+                    echo "<div class='row'>";
+                    echo "<div class='item'><img src='img/Motor.png' alt='Teljesítmény'> Teljesítmény: " . $row["teljesitmeny"] . "</div>";
+                    echo "</div>";
+                    echo "</div>";
+                    echo "<div/div>";
                 ?>
                  <!--Diagram-->
     <script src="https://www.gstatic.com/charts/loader.js"></script>
@@ -126,12 +128,11 @@
                 }
             });
             dataArray.reverse();
-            dataArray.splice(0, 0, ['Dátum', 'Kilóméteróra állása']);
+            dataArray.splice(0, 0, ['Dátum', 'Kilométeróra-állás']);
             const data = google.visualization.arrayToDataTable(dataArray);
             const options = {
-                title: 'Kilóméteróra állásának változása az idő során',
                 hAxis: {title: 'Dátum'},
-                vAxis: {title: 'Kilóméteróra állása'},
+                vAxis: {title: 'Kilométeróra-állás'},
                 legend: 'none',
                 pointSize: 15,
                 backgroundColor: 'transparent',

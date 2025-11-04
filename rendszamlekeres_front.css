@@ -11,18 +11,19 @@ body{
     height: 65px;
     margin: 0px;
     background-color: white;
-    box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 10px rgba(37, 31, 31, 0.1);
     box-sizing: border-box;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between; 
 }
+
 input[type="submit"],.bejelentkezes_gombja {
-    margin: 10px 10px; 
-    padding: 5px 20px;
+    margin: 10px;
+    padding: 5px 15px;
     background-color: #FFFFFF;
-    color: #1F2937;
+    color: #000000;
     text-decoration: none;
     border-radius: 15px;
     font-weight: bold;
@@ -33,6 +34,15 @@ input[type="submit"],.bejelentkezes_gombja {
     transform: scale(1);
     font-size: 20px;
 }
+
+.bejelentkezes_gomb {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-right: 20px;
+}
+
 input[type="submit"]:hover, .bejelentkezes_gombja:hover {
     transform: scale(1.05);
     background-color: #1F2937;
@@ -46,7 +56,7 @@ h1{
     font-family:inter;
     text-shadow: #1F2937 1px 1px 2px;
     position: relative;
-    padding-left: 15px
+    padding-left: 15px;
 }
 
 h3{
@@ -55,14 +65,26 @@ h3{
     text-align: left;
 }
 
-.row {
+.auto_adatok{
+    width: 90%;
+    margin: 30px auto;
+    padding: 10px;
+    border: 2px solid;
+    border-image: linear-gradient(to bottom right, white, #1d74bb)2;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    color: #1F2937;
+    font-family: 'Zalando Sans Expanded', sans-serif;
+}
+
+.auto_adatok .row {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
 }
 
-.row .item {
+.auto_adatok .item {
     font-size: large;
     font-weight: bold;
     flex: 1 1 22%;
@@ -70,13 +92,11 @@ h3{
     align-items: center;
     justify-content: flex-start;
     gap: 6px;
-    padding-left: 3%;
-    padding-top: 1%;
-    border-radius: 10px;
+    padding: 15px;
     box-sizing: border-box;
     text-align: left; 
 }
-.row .item img {
+.auto_adatok .item img {
     width: 30px;
     height: 30px;
 }
@@ -104,7 +124,7 @@ select{
     border-radius: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     background-color: #FFFFFF;
-    display: flex
+    display: flex;
     justify-content: center;
     margin: 20px auto;
 }
