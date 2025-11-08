@@ -31,7 +31,7 @@
             <input type="text" id="alvazszam" name="alvazszam" placeholder="4Y1SL65848Z411439"><br><br>
             <input type="submit" value="Ellenőrzés">
         <div class="p2">✔ Jármű vizsgálatai során készült képek<br>
-                ✔ Kilóméteróra állásának az alakulása<br>
+                ✔ Kilométeróra állásának az alakulása<br>
                 ✔ Műszaki adatok kimutatása</div>
             </div>
         </form>
