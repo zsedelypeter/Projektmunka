@@ -22,7 +22,7 @@
                 <?php endif; ?>
             </div>
         </div>
-        <p>TuddD meg pillanatok alatt, mi rejlik a rendszám mögött!<br>
+        <p>Tudd meg pillanatok alatt, mi rejlik a rendszám mögött!<br>
             Egy kattintás, és máris előtted a jármű múltja, adatai és értéke. Gyorsan, egyszerűen és megbízhatóan.</p>
         <form action="rendszamlekeres.php" method="POST">
             <label for="rendszam">Rendszám:</label><br>
