@@ -1,24 +1,33 @@
-<html>
-    <head>
-        <title>Kristóf</title>
-        <link rel="icon" type="image/x-icon" href="https://www.shutterstock.com/shutterstock/videos/3558613281/thumb/12.jpg?ip=x480">
-    </head>
-    <body>
-        <h1>Regisztráció</h1>
-        <form action="regisztracio.php" method="POST">
-            <label for="username">Felhasználónév:</label><br>
-            <input type="text" id="username" name="username"><br>
-            <label for="email">Email:</label><br>
-            <input type="text" id="email" name="email"><br>
-            <label for="password">Jelszó:</label><br>
-            <input type="text" id="password" name="password"><br><br>
-            <input type="submit" value="Regisztráció">
-        </form> 
-
-    </body>
-</html>
-
-<html>
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Bengo - Regisztráció</title>
+    <link rel="stylesheet" href="regisztracio.css">
+</head>
 <body>
+    <!-- Fejléc -->
+    <div class="fejlec">
+        <h1>Bengo</h1>
+        <div class="bejelentkezes_gomb">
+            <a href="login.html" class="bejelentkezes_gombja">Bejelentkezés</a>
+        </div>
+    </div>
 
-    
+    <!-- Regisztrációs panel -->
+    <form action="regisztracio.php" method="POST" class="regisztracio_panel">
+        <h2>Regisztráció</h2>
+
+        <label for="username"></label>
+        <input type="text" id="username" name="username" placeholder="Felhasználónév" required>
+
+        <label for="email"></label>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+
+        <label for="password"></label>
+        <input type="password" id="password" name="password" placeholder="Jelszó" required>
+
+        <input type="submit" value="Regisztráció">
+    </form>
+</body>
+</html>

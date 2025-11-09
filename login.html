@@ -1,28 +1,27 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <link rel="stylesheet" href="login_front.css">
-        <title>Kristóf</title>
-        <link rel="icon" type="image/x-icon" href="https://www.shutterstock.com/shutterstock/videos/3558613281/thumb/12.jpg?ip=x480">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Zalando+Sans+Expanded:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <div class="top-strip"><h1>Bengo</h1></div>
-        <div class="info-text">
-            <p>Tudd meg pillanatok alatt, mi rejlik a rendszám mögött!<br>
-            Egy kattintás, és máris előtted a jármű múltja, adatai és értéke. Gyorsan, egyszerűen és megbízhatóan.</p>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <title>Bengo - Bejelentkezés</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <!-- Fejléc -->
+    <div class="fejlec">
+        <h1>Bengo</h1>
+        <div class="bejelentkezes_gomb">
+            <a href="regisztracio.html" class="bejelentkezes_gombja">Regisztráció</a>
         </div>
-        <div class="login-container">
-            <form action="login.php" method="POST">
-                <label for="username">Felhasználónév</label><br>
-                <input type="text" id="username" name="username"><br>
-                <label for="password">Jelszó</label><br>
-                <input type="text" id="password" name="password"><br><br>
-                <input type="submit" value="Bejelentkezés">
-                <hr class="divider">
-                <a href="regisztracio.html" class="register-button">Regisztráció</a>
-            </form>
-        </div>
-    </body>
-</html>
+    </div>
 
+    <!-- Login panel -->
+    <form action="login.php" method="POST" class="login_panel">
+        <h2>Bejelentkezés</h2>
+
+        <input type="text" id="username" name="username" placeholder="Felhasználónév" required>
+        <input type="password" id="password" name="password" placeholder="Jelszó" required>
+
+        <input type="submit" value="Bejelentkezés">
+    </form>
+</body>
+</html>
