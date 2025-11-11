@@ -35,7 +35,7 @@
          $selected_year = $_POST["selected_year"];
     }
    
-    $saved = implode([$rendszam, $alvazszam]);
+    $saved = implode([$rendszam, $alvazszam, $_SESSION["isloggedin"]]);
 
 
     //Ha már rákerestünk erre az autóra, akkor nem csinálunk újabb lekérdezést, hanem a régiből dolgozunk, ha pedig új autóra keresünk, elmentjük a lekérdezés eredményét emiatt
@@ -142,8 +142,27 @@
             chart.draw(data, options);
         }
     </script>
+                <?php $kep = 'img/' . $row["kep"];?>
+                <button id="ViewImageBtn" class="view-image-btn" car-image-src="<?php echo $kep; ?>">Autó képe</button>
+                <div id="Modal" class="modal">
+                    <span class="close">X</span>
+                    <img class="modal-content" id="img01">
+                </div>
+                <script>
+                    //Kép popup 
+                    var modal = document.getElementById("Modal");
+                    var modalimg = document.getElementById("img01");
+                    var btn = document.getElementById("ViewImageBtn");
+                    btn.onclick = function(){
+                        modal.style.display = "block";
+                        modalimg.src = this.getAttribute('car-image-src');
+                    }
+                    var span = document.getElementsByClassName("close")[0];
+                    span.onclick = function(){
+                        modal.style.display = "none";
+                    }
+                </script>
                 <?php
-                echo "<p>Kép</p> <br><div class='image_container'><img src='img/" . $row["kep"] . "' alt='" . $row["kep"] . "'></div><br>";
                 echo "<li>Kilométeróra állás: " . $row["kmallas"] . "</li>";
                 echo "<li>Műszaki vizsga dátuma: " . $row["mvdatum"] . "</li>";
                 echo "</ul>";
