@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Kristóf</title>
+        <title>Bengo</title>
         <link rel="stylesheet" href="rendszamlekeres_front.css">
     </head>
     <body>
@@ -143,7 +143,7 @@
         }
     </script>
                 <?php $kep = 'img/' . $row["kep"];?>
-                <button id="ViewImageBtn" class="view-image-btn" car-image-src="<?php echo $kep; ?>">Autó képe</button>
+                <button id="ViewImageBtn" class="view-image-btn" car-image-src="<?php echo $kep; ?>">Átvizsgálás során készült képek</button>
                 <div id="Modal" class="modal">
                     <span class="close">X</span>
                     <img class="modal-content" id="img01">
@@ -163,27 +163,35 @@
                     }
                 </script>
                 <?php
-                echo "<li>Kilométeróra állás: " . $row["kmallas"] . "</li>";
-                echo "<li>Műszaki vizsga dátuma: " . $row["mvdatum"] . "</li>";
-                echo "</ul>";
                 //Ha be van jelentkezve
                 if ($_SESSION["isloggedin"]) {
-                    echo "Műszaki lejárat: " . $row["muszakilej"] . "<br>";
-                    echo "Forgalmi engedély: " . $row["forgalome"] . "<br>";
-                    echo "Biztosítás: " . $row["biztositase"] . "<br>";
-                    echo "Korrózió: " . $row["korozese"] . "<br>";
-                    echo "Tulajdonosok száma: " . $row["tulajdonossz"] . "<br>";
-                    echo "Motorkód: " . $row["motorkod"] . "<br>";
-                    echo "Környézetvédelmi osztály: " . $row["kornyezetved"] . "<br>";
-                    echo "Gépjármű kategória: " . $row["gepjkat"] . "<br>";
-                    echo "Utasok száma: " . $row["utassz"] . "<br>";
-                    echo "Váltó típus: " . $row["valtotip"] . "<br>";
-                    echo "Kivitel: " . $row["kivitel"] . "<br>";
-                    echo "Tömeg: " . $row["tomeg"] . "<br>";
-                    echo "Vontatott tömeg fékkel: " . $row["vontattomf"] . "<br>";
-                    echo "Vontatott tömeg fék nélkül: " . $row["vontattomfn"] . "<br>";
-                    echo "Műszaki vizsga dátuma: " . $row["mvdatum"] . "<br>";
-                    echo "Műszaki vizsga eredménye: " . $row["eredmeny"] . "<br>";
+                    echo "<div class='auto_adatok_bovitett'>";
+                    echo "<h3>További adatok</h3>";
+                    echo "<div class='row'>";
+                    echo "<div class='item'><img src='img/muszaki_lejarat.png' alt='Műszaki vizsga'> Műszaki vizsga lejárata: ". $row["muszakilej"] . "</div>";
+                    echo "<div class='item'><img src='img/forgalmi.png' alt='Forgalmi engedély'> Forgalmi engedély: " . $row["forgalome"] . "</div>";
+                    echo "<div class='item'><img src='img/biztositas.png' alt='Biztosítás'> Biztosítás: " . $row["biztositase"] . "</div>";
+                    echo "<div class='item'><img src='img/rozsda.png' alt='Rozsda'> Korrózió: " . $row["korozese"] . "</div>";
+                    echo "</div>";
+                    echo "<div class='row'>";
+                    echo "<div class='item'><img src='img/tulajdonos.png' alt='Tulajdonos'> Tulajdonosok száma: " . $row["tulajdonossz"] . "</div>";
+                    echo "<div class='item'><img src='img/motorkod.png' alt='Motorkód'> Motorkód: " . $row["motorkod"] . "</div>";
+                    echo "<div class='item'><img src='img/euro.png' alt='Környezetvédelmi osztály'> Környézetvédelmi osztály: " . $row["kornyezetved"] . "</div>";
+                    echo "<div class='item'><img src='img/jarmu_tipusa.png' alt='Gépjármű kategória'> Gépjármű kategória: " . $row["gepjkat"] . "</div>";
+                    echo "</div>";
+                    echo "<div class='row'>";
+                    echo "<div class='item'><img src='img/utas.png' alt='Utasok száma'> Utasok száma: " . $row["utassz"] . "</div>";
+                    echo "<div class='item'><img src='img/valto.png' alt='Váltó típus'> Váltó típus: " . $row["valtotip"] . "</div>";
+                    echo "<div class='item'><img src='img/kivitel.png' alt='Kivitel'> Kivitel: " . $row["kivitel"] . "</div>";
+                    echo "<div class='item'><img src='img/tomeg.png' alt='Tömeg'> Tömeg: " . $row["tomeg"] . "</div>";
+                    echo "</div>";
+                    echo "<div class='row'>";
+                    echo "<div class='item'><img src='img/utanfuto.png' alt='Vontatott tömeg fékkel'> Vontatott tömeg fékkel: " . $row["vontattomf"] . "</div>";
+                    echo "<div class='item'><img src='img/utanfuto.png' alt='Vontatott tömeg fék nélkül'> Vontatott tömeg fék nélkül: " . $row["vontattomfn"] . "</div>";
+                    echo "<div class='item'><img src='img/vizsga.png' alt='Műszaki vizsga'> Műszaki vizsga dátuma: " . $row["mvdatum"] . "</div>";
+                    echo "<div class='item'><img src='img/vizsga_eredmeny.png' alt='Műszaki vizsga eredménye'> Műszaki vizsga eredménye: " . $row["eredmeny"] . "</div>";
+                    echo "</div>";
+                    echo "<div/div>";
                 }
                 $firstRow = false;
                 }
