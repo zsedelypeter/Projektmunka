@@ -248,3 +248,10 @@ select{
     cursor: pointer;
     font-size: 21px;
 }
+
+.form-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+}

@@ -142,27 +142,7 @@
             chart.draw(data, options);
         }
     </script>
-                <?php $kep = 'img/' . $row["kep"];?>
-                <button id="ViewImageBtn" class="view-image-btn" car-image-src="<?php echo $kep; ?>">Átvizsgálás során készült képek</button>
-                <div id="Modal" class="modal">
-                    <span class="close">X</span>
-                    <img class="modal-content" id="img01">
-                </div>
-                <script>
-                    //Kép popup 
-                    var modal = document.getElementById("Modal");
-                    var modalimg = document.getElementById("img01");
-                    var btn = document.getElementById("ViewImageBtn");
-                    btn.onclick = function(){
-                        modal.style.display = "block";
-                        modalimg.src = this.getAttribute('car-image-src');
-                    }
-                    var span = document.getElementsByClassName("close")[0];
-                    span.onclick = function(){
-                        modal.style.display = "none";
-                    }
-                </script>
-                <?php
+                <?php $kep = 'img/' . $row["kep"];
                 //Ha be van jelentkezve
                 if ($_SESSION["isloggedin"]) {
                     echo "<div class='auto_adatok_bovitett'>";
@@ -203,13 +183,34 @@
 
 
     ?>
-    <form action="rendszamlekeres.php" method="POST">
+    <div class="form-container">
+        <form action="rendszamlekeres.php" method="POST">
             <input type="hidden" name="rendszam" value="<?= $rendszam ?>">
             <input type="hidden" name="alvazszam" value="<?= $alvazszam ?>">
             <select id="yearselect" name="selected_year">
             </select>
         </form>
         
+        <button id="ViewImageBtn" class="view-image-btn" car-image-src="<?php echo $kep; ?>">Átvizsgálás során készült képek</button>
+                <div id="Modal" class="modal">
+                    <span class="close">X</span>
+                    <img class="modal-content" id="img01">
+                </div>
+                <script>
+                    //Kép popup 
+                    var modal = document.getElementById("Modal");
+                    var modalimg = document.getElementById("img01");
+                    var btn = document.getElementById("ViewImageBtn");
+                    btn.onclick = function(){
+                        modal.style.display = "block";
+                        modalimg.src = this.getAttribute('car-image-src');
+                    }
+                    var span = document.getElementsByClassName("close")[0];
+                    span.onclick = function(){
+                        modal.style.display = "none";
+                    }
+                </script>
+        </div>
         <script>
             //A dropdopwn menüben csak az autóhoz tartozó dátumok legyenek
             const selected_year = <?= json_encode($selected_year) ;?>;
